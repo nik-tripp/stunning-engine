@@ -1,0 +1,9 @@
+To start, I chose this premade package since it's what I'm most familiar with - I could theoretically have dumbed things
+down and just used a basic Node server with the JSON provided rather than a full stack.
+
+This package includes testing frameworks, which I might use if I get everything else done exceedingly well within the
+time limit, but tests weren't specified in the spec, and 3 hours isn't a ton of time
+
+All I have done before starting this repo is this file, cleaning Prisma, customizing the README, and preparing my environment
+(Side note: moving back to WSL after using a preconfigured Mac environment for an extended period of time is JARRING)
+
