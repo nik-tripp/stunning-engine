@@ -58,7 +58,7 @@ const IndexPage: NextPageWithLayout = () => {
           )}
           {formController.values.labelIdStartsWith.length >= 2 &&
             !fetchingShipments &&
-            !retrievedShipments && (
+            !retrievedShipments?.length && (
               <Text>Sorry, we didn&apos;t find anything for that kit label</Text>
             )}
         </Stack>
