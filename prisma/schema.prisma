@@ -10,3 +10,8 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model KitShipment {
+  id                   Int    @id @default(autoincrement())
+  labelId              String @unique
+  shippingTrackingCode String @unique
+}
