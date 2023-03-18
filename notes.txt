@@ -7,3 +7,15 @@ time limit, but tests weren't specified in the spec, and 3 hours isn't a ton of 
 All I have done before starting this repo is this file, cleaning Prisma, customizing the README, and preparing my environment
 (Side note: moving back to WSL after using a preconfigured Mac environment for an extended period of time is JARRING)
 
+
+
+First step was to create the data model and populate it because knowing what I'm working with in the backend informs
+what inputs and other controls I want to provide to the users
+
+Next is brining in Mantine because it's a delightfully straightforward UI package with a killer form management system
+
+Start with a basic form to hit the tRPC endpoint that I need to actually create, so I can get some data back and decide
+how to best display it.
+
+I went overboard on what the tRPC router supplies, but tbh it felt weird to only be ale to query, and it was easy to
+include the other methods

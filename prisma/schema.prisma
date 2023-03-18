@@ -10,6 +10,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// TODO extract Data from this model once we want to know more about Kits than just their shipping details
 model KitShipment {
   id                   Int    @id @default(autoincrement())
   labelId              String @unique
