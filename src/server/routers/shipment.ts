@@ -2,11 +2,11 @@
  *
  * This is an example router, you can delete this file and then update `../pages/api/trpc/[trpc].tsx`
  */
-import { router, publicProcedure } from '../trpc';
-import { Prisma } from '@prisma/client';
-import { TRPCError } from '@trpc/server';
-import { z } from 'zod';
-import { prisma } from '~/server/prisma';
+import { router, publicProcedure } from "../trpc";
+import { Prisma } from "@prisma/client";
+import { TRPCError } from "@trpc/server";
+import { z } from "zod";
+import { prisma } from "~/server/prisma";
 
 /**
  * Default selector for Post/Put/Patch.
@@ -19,9 +19,9 @@ const shipmentUpdateArgs = Prisma.validator<Prisma.KitShipmentSelect>()({
 });
 
 export const shipmentRouter = router({
-  byId: publicProcedure.input(z.object({id: z.number()})).query(async ({input}) => {
-      return prisma.kitShipment.findUnique({ where: input });
-    }),
+  byId: publicProcedure.input(z.object({ id: z.number() })).query(async ({ input }) => {
+    return prisma.kitShipment.findUnique({ where: input });
+  }),
   byLabelId: publicProcedure
     .input(
       z.object({
