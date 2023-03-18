@@ -15,7 +15,16 @@ what inputs and other controls I want to provide to the users
 Next is brining in Mantine because it's a delightfully straightforward UI package with a killer form management system
 
 Start with a basic form to hit the tRPC endpoint that I need to actually create, so I can get some data back and decide
-how to best display it.
+how to best display it
 
 I went overboard on what the tRPC router supplies, but tbh it felt weird to only be ale to query, and it was easy to
 include the other methods
+
+Set up the form and basic page layout, with data feed coming from backend
+
+Note to self: stop getting distracted with trying to customize code styling while you're in the middle of trying to
+get a sample done within three hours
+
+Throw in some conditional rendering, space things out, and explain what the page is doing, and I'll call that good
+
+Note: I do not have a strong record of defining layouts well - I prefer to leave that up to actual graphic designers
