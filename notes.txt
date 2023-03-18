@@ -28,3 +28,9 @@ get a sample done within three hours
 Throw in some conditional rendering, space things out, and explain what the page is doing, and I'll call that good
 
 Note: I do not have a strong record of defining layouts well - I prefer to leave that up to actual graphic designers
+
+Oh good lord I just realized that I missed the entire "autocomplete" part. I knew this seemed too simple.
+
+There. Switch to auto-fetching on type, filter options after at least two characters are entered to keep data volume
+lower than it could be (at worst), and display tracking info when we're down to a single entry returned
+

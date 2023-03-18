@@ -60,4 +60,15 @@ export const shipmentRouter = router({
         data,
       });
     }),
+  list: publicProcedure
+    .input(z.object({ labelIdStartsWith: z.string().optional() }))
+    .query(async ({ input }) => {
+      return prisma.kitShipment.findMany({
+        where: {
+          labelId: {
+            startsWith: input.labelIdStartsWith,
+          },
+        },
+      });
+    }),
 });

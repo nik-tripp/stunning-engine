@@ -1,15 +1,26 @@
 import { trpc } from "../utils/trpc";
 import { NextPageWithLayout } from "./_app";
-import { Button, Card, Container, Stack, TextInput, Title, Text, Anchor } from "@mantine/core";
+import {
+  Anchor,
+  Autocomplete,
+  Button,
+  Card,
+  Container,
+  Stack,
+  TextInput,
+  Title,
+  Text,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useState } from "react";
 
 const IndexPage: NextPageWithLayout = () => {
-  const formController = useForm({ initialValues: { labelId: "" } });
-  const [searchLabel, setSearchLabel] = useState("");
-  const { data: retrievedShipment } = trpc.shipment.byLabelId.useQuery(formController.values, {
-    enabled: Boolean(searchLabel),
-  });
+  const formController = useForm({ initialValues: { labelIdStartsWith: "" } });
+  const { data: retrievedShipments, isFetching: fetchingShipments } = trpc.shipment.list.useQuery(
+    formController.values,
+    {
+      enabled: formController.values.labelIdStartsWith.length >= 2,
+    },
+  );
 
   // prefetch all posts for instant navigation
   // useEffect(() => {
@@ -24,27 +35,32 @@ const IndexPage: NextPageWithLayout = () => {
       <Card p="xl">
         <Stack>
           <Title>Track your shipment</Title>
-          <Text>Enter your kit ID to find your tracking information</Text>
-          <form onSubmit={formController.onSubmit((values) => setSearchLabel(values.labelId))}>
+          <Text>Start typing your kit ID to find your tracking information</Text>
+          <form>
             <Stack>
-              <TextInput label="Kit ID" {...formController.getInputProps("labelId")} />
-              <Button type="submit">Find my Shipment Info</Button>
+              <Autocomplete
+                label="Kit ID"
+                {...formController.getInputProps("labelIdStartsWith")}
+                data={retrievedShipments?.map((shipment) => shipment.labelId) ?? []}
+              />
             </Stack>
           </form>
-          {Boolean(searchLabel) &&
-            (retrievedShipment ? (
-              <>
-                <Text>Your tracking ID is {retrievedShipment.shippingTrackingCode}</Text>
-                <Anchor
-                  href={`https://www.fedex.com/fedextrack/?trknbr=${retrievedShipment.shippingTrackingCode}`}
-                  target="_blank"
-                >
-                  Track your shipment with FedEx
-                </Anchor>
-              </>
-            ) : (
+          {retrievedShipments?.length == 1 && (
+            <>
+              <Text>Your tracking ID is {retrievedShipments[0]?.shippingTrackingCode}</Text>
+              <Anchor
+                href={`https://www.fedex.com/fedextrack/?trknbr=${retrievedShipments[0]?.shippingTrackingCode}`}
+                target="_blank"
+              >
+                Track your shipment with FedEx
+              </Anchor>
+            </>
+          )}
+          {formController.values.labelIdStartsWith.length >= 2 &&
+            !fetchingShipments &&
+            !retrievedShipments && (
               <Text>Sorry, we didn&apos;t find anything for that kit label</Text>
-            ))}
+            )}
         </Stack>
       </Card>
     </Container>
